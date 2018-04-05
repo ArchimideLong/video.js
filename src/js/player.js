@@ -2611,8 +2611,6 @@ class Player extends Component {
     }
 
     if (!titleCaseEquals(sourceTech.tech, this.techName_)) {
-      this.changingSrc_ = true;
-
       // load this technology with the chosen source
       this.loadTech_(sourceTech.tech, sourceTech.source);
       return false;
