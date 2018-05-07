@@ -295,7 +295,7 @@ QUnit[qunitFn]('sourceset', function(hooks) {
       this.player.one('sourceset', (e) => {
         assert.ok(true, '** sourceset with relative source and <source> el');
         // mediaEl attr is relative
-        validateSource(this.player, {src: getAbsoluteURL(one.src), type: one.type}, e);
+        validateSource(this.player, {src: getAbsoluteURL(one.src), type: one.type}, e, {attr: one.src});
 
         this.player.one('sourceset', (e2) => {
           assert.ok(true, '** sourceset with relative source and mediaEl.src');

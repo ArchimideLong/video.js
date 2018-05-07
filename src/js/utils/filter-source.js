@@ -3,7 +3,6 @@
  */
 import {isObject} from './obj';
 import {getMimetype} from './mimetypes';
-import {getAbsoluteURL} from './url';
 
 /**
  * Filter out single bad source objects or multiple source objects in an
@@ -62,8 +61,6 @@ function fixSource(src) {
   if (!src.type && mimetype) {
     src.type = mimetype;
   }
-
-  src.src = getAbsoluteURL(src.src);
 
   return src;
 }
