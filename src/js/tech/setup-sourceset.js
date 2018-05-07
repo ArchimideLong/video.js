@@ -3,17 +3,6 @@ import document from 'global/document';
 import mergeOptions from '../utils/merge-options';
 import {getAbsoluteURL} from '../utils/url';
 
-const getSrc = (el) => {
-  // We use the attribute to check if a source is set because when
-  // the source for the element is set to a blank string. The attribute will
-  // return '' and the property will return window.location.href.
-  if (el.getAttribute('src')) {
-    return el.src;
-  }
-
-  return '';
-};
-
 /**
  * This function is used to fire a sourceset when there is something
  * similar to `mediaEl.load()` being called. It will try to find the source via
@@ -32,7 +21,7 @@ const sourcesetLoad = (tech) => {
 
   // if `el.src` is set, that source will be loaded.
   if (el.hasAttribute('src')) {
-    tech.triggerSourceset(getSrc(el));
+    tech.triggerSourceset(el.src);
     return true;
   }
 
@@ -59,7 +48,7 @@ const sourcesetLoad = (tech) => {
 
   // only count valid/non-duplicate source elements
   for (let i = 0; i < sources.length; i++) {
-    const url = getSrc(sources[i]);
+    const url = sources[i].src;
 
     if (url && srcUrls.indexOf(url) === -1) {
       srcUrls.push(url);
@@ -268,7 +257,7 @@ const setupSourceset = function(tech) {
       const retval = srcDescriptor.set.call(el, v);
 
       // we use the getter here to get the actual value set on src
-      tech.triggerSourceset(getSrc(el));
+      tech.triggerSourceset(el.src);
 
       return retval;
     }
@@ -278,7 +267,7 @@ const setupSourceset = function(tech) {
     const retval = oldSetAttribute.call(el, n, v);
 
     if ((/src/i).test(n)) {
-      tech.triggerSourceset(getSrc(el));
+      tech.triggerSourceset(el.src);
     }
 
     return retval;
